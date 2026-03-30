@@ -1,0 +1,1 @@
+[{"input":{"url":"https://www.google.com/maps/search/medspa+in+london+uk"},"error":"Crawler error: Navigation failed for https://www.google.com/maps/search/medspa+in+london+uk: This endpoint has been disabled due to low success rate, please add &brd_json=1 to URL to retrieve parsed results","error_code":"proxy"}]
