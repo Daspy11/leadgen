@@ -1,0 +1,3 @@
+# Large raw data files (exceed GitHub 100MB limit)
+medspa/raw_results.json
+specialty_clinics/raw_results.json
