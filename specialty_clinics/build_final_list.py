@@ -242,6 +242,32 @@ def is_specialty_clinic(biz):
                      'family practice physician']:
         return False
 
+    # Exclude psychologists, therapists, psychiatry, and conservative clinical types
+    psych_keywords = [
+        'psychiatr', 'psycholog', 'psychotherapy', 'psychotherapist',
+        'mental health', 'counselling', 'counseling', 'counsellor',
+        'therapist', 'therapy clinic', 'cbt ', 'cbt clinic',
+        'talking therapy', 'cognitive behav',
+        'physiotherapy', 'physio clinic', 'physical therap',
+        'osteopath', 'chiropract', 'podiatr', 'chiropod',
+        'optometrist', 'optician', 'hearing aid', 'audiol',
+        'speech therap', 'occupational therap',
+        'acupuncture', 'chinese medicine', 'homeopath', 'naturopath',
+        'reflexolog', 'hypnotherap',
+    ]
+    if any(kw in name for kw in psych_keywords):
+        return False
+    psych_cats = [
+        'psychiatr', 'psycholog', 'psychotherap', 'counsell',
+        'mental health', 'therapist',
+        'physiotherap', 'physical therap', 'osteopath', 'chiropract',
+        'podiatr', 'optometrist', 'optician', 'audiol',
+        'acupunctur', 'speech', 'occupational',
+        'homeopath', 'naturopath', 'reflexolog', 'hypnotherap',
+    ]
+    if any(kw in category for kw in psych_cats):
+        return False
+
     # Exclude pure medspas (already in the other dataset)
     medspa_exact = ['medspa', 'med spa', 'medispa', 'medi spa', 'medi-spa', 'medical spa']
     if any(kw in name for kw in medspa_exact):
@@ -257,10 +283,8 @@ def is_specialty_clinic(biz):
         'hair transplant', 'hair restoration', 'hair loss clinic',
         'hair clinic', 'tricholog',
         # (Dentists excluded per user request)
-        # Physiotherapy / sports medicine
-        'physiotherapy', 'physio clinic', 'sports medicine',
-        'sports injury', 'sports clinic', 'osteopath', 'chiropract',
-        'rehabilitation clinic',
+        # Sports medicine (physio/osteo/chiro excluded)
+        'sports medicine', 'sports injury', 'sports clinic',
         # IV drip / wellness
         'iv drip', 'iv therapy', 'vitamin infusion', 'wellness clinic',
         'health clinic', 'vitality clinic', 'biohack',
@@ -270,12 +294,10 @@ def is_specialty_clinic(biz):
         # Hormone / TRT
         'hormone', 'trt clinic', 'testosterone', 'endocrin',
         'bioidentical', 'hrt clinic', 'menopause clinic',
-        # Mental health
-        'psychiatr', 'psycholog', 'mental health', 'counselling clinic',
-        'therapy clinic', 'cbt clinic', 'psychotherapy',
+        # (Mental health / psych excluded)
         # Laser eye
         'laser eye', 'lasik', 'eye surgery', 'ophthalmolog',
-        'optometrist', 'vision clinic', 'eye clinic',
+        'vision clinic', 'eye clinic',
         # Other adjacent
         'allergy clinic', 'ent clinic', 'ear nose throat',
         'sexual health', 'std clinic', 'sti clinic',
@@ -283,7 +305,6 @@ def is_specialty_clinic(biz):
         'nutrition clinic', 'dietitian', 'nutritionist',
         'sleep clinic', 'hyperbaric', 'cryotherapy',
         'stem cell', 'prp treatment', 'regenerative',
-        'acupuncture', 'chinese medicine',
         'concierge doctor',
         'private clinic', 'medical centre', 'medical center',
     ]
@@ -293,12 +314,10 @@ def is_specialty_clinic(biz):
     # Strong category matches
     strong_cats = [
         'fertility', 'ivf', 'dermatolog', 'hair replacement',
-        'physiotherap', 'chiropract', 'osteopath',
-        'psychiatr', 'psycholog',
-        'ophthalmolog', 'optometrist', 'eye care',
+        'ophthalmolog', 'eye care',
         'medical clinic', 'medical center', 'medical centre',
         'weight loss', 'nutritionist', 'dietitian',
-        'acupunctur', 'sports medicine', 'rehabilitation',
+        'sports medicine',
         'allergy', 'ent ', 'endocrin',
     ]
     if any(kw in category for kw in strong_cats):
